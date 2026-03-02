@@ -17,13 +17,13 @@ fn main() {
         .read_line(&mut guess)
         .expect("Failed to read line");
 
+    let guess: u32 = guess.trim().parse().expect("Please type a number. ");
+
     println!("You guessed {guess}!");
     println!("The secret number is: {secret_number}");
-    
-    guess = str::parse::<String>(&guess)
-        .expect("Failed to calculate.");
 
     //Ideally we'd want a while loop that checks to see if the guessed number equals the secret number.
+    //Nope! I was wrong! Using [[Rust/control-flow/match|match]] is more optimal.
     match guess.cmp(&secret_number) {
         Ordering::Less => println!("Too small!"),
         Ordering::Greater => println!("Too big!"),
