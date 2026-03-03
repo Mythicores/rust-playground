@@ -5,29 +5,41 @@ use std::cmp::Ordering;
 
 use rand::Rng;
 
-fn main() {
-    println!("Welcome to the guessing game!");
+    fn main() {
 
-    println!("Please input your guess.");
+        println!("Welcome to the guessing game!");
+        let secret_number = rand::thread_rng().gen_range(1..=100);
 
-    let mut guess = String::new();
-    let secret_number = rand::thread_rng().gen_range(1..=100);
+        loop{
+            println!("Please input your guess:");
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to read line");
+            let mut guess = String::new();
+            
 
-    let guess: u32 = guess.trim().parse().expect("Please type a number. ");
+            io::stdin()
+                .read_line(&mut guess)
+                .expect("Failed to read line");
 
-    println!("You guessed {guess}!");
-    println!("The secret number is: {secret_number}");
+            let guess: u32 = match guess.trim().parse(){
+                Ok(num) => num,
+                Err(_) => {println!("That's not a number! Please try again!\n");
+                continue;
+                }
+            };
 
-    //Ideally we'd want a while loop that checks to see if the guessed number equals the secret number.
-    //Nope! I was wrong! Using [[Rust/control-flow/match|match]] is more optimal.
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You got it! Five stars!"),
+            println!("\nYou guessed {guess}!\n");
+            println!("The secret number is: {secret_number}");
+
+            //Ideally we'd want a while loop that checks to see if the guessed number equals the secret number.
+            
+            //Nope! I was wrong! Using [[Rust/control-flow/match|match]] is more optimal.
+            match guess.cmp(&secret_number) {
+                Ordering::Less => println!("Too small!"),
+                Ordering::Greater => println!("Too big!"),
+                Ordering::Equal => { 
+                    println!("You got it! Five stars!");
+                    break;
+            }
+        }
     }
-
 }
