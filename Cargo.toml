@@ -1,2 +1,3 @@
 [workspace]
-members = ["guessing_game", "file-reading"]
+resolver = "2"
+members = ["guessing_game_v0", "file-reading", "guessing_game_v1"]
