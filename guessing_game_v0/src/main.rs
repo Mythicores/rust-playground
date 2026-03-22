@@ -28,7 +28,6 @@ use rand::Rng;
             };
 
             println!("\nYou guessed {guess}!\n");
-            println!("The secret number is: {secret_number}");
 
             //Ideally we'd want a while loop that checks to see if the guessed number equals the secret number.
             
