@@ -16,7 +16,7 @@ fn main() {
         .expect("Failed to read line.");
 
     println!("You guessed {guess}");
-    println!("The secret number is {secret_number}");
+    //println!("The secret number is {secret_number}");
 
     let guess: u32 = match guess.trim().parse(){
         Ok(num) => num,
